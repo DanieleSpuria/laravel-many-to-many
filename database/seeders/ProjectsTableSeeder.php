@@ -7,6 +7,7 @@ use App\Models\Type;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Faker\Generator as Faker;
+use App\Helpers\CustomHelper;
 
 class ProjectsTableSeeder extends Seeder
 {
@@ -21,7 +22,7 @@ class ProjectsTableSeeder extends Seeder
         $new_project = new Project();
         $new_project->type_id = Type::inRandomOrder()->first()->id;
         $new_project->title = $faker->sentence();
-        $new_project->slug = Project::generateSlug(($new_project->title));
+        $new_project->slug = CustomHelper::generateSlug(new Project(), $new_project->title);
         $new_project->date = $faker->date();
         $new_project->description = $faker->text(1000);
         $new_project->save();
