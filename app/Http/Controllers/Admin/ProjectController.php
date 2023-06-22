@@ -9,6 +9,7 @@ use App\Models\Project;
 use App\Models\Technology;
 use App\Models\Type;
 use Illuminate\Support\Facades\Storage;
+use App\Helpers\CustomHelper;
 
 
 class ProjectController extends Controller
@@ -45,18 +46,19 @@ class ProjectController extends Controller
     public function store(ProjectRequest $request)
     {
       $form_data = $request->all();
-      dd($form_data);
-      $form_data['slug']= Project::generateSlug($form_data['title']);
+      $form_data['slug']= CustomHelper::generateSlug(new Project, $form_data['title']);
 
       if (array_key_exists('image', $form_data)) {
         $form_data['image_name'] = $request->file('image')->getClientOriginalName();
         $form_data['image_path'] = Storage::put('uploads', $form_data['image']);
-
       }
 
-      $new_project = new Project();
-      $new_project->fill($form_data);
-      $new_project->save();
+      $new_project = Project::create($form_data);
+
+      if (array_key_exists('technologies', $form_data)) {
+        $new_project->technologies()->attach($form_data['technologies']);
+      }
+
       return redirect()->route('admin.projects.show', $new_project);
     }
 
@@ -94,7 +96,7 @@ class ProjectController extends Controller
     {
       $form_data = $request->all();
       if ($form_data['title'] != $project->title) {
-        $form_data['slug'] = Project::generateSlug($form_data['title']);
+        $form_data['slug'] = CustomHelper::generateSlug(new Project() , $form_data['title']);
       } else {
         $form_data['slug'] = $project->slug;
       }
