@@ -40,6 +40,15 @@
       </div>
 
       <div class="mb-3">
+        <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+          @foreach ($technologies as $technology)
+           <input type="checkbox" class="btn-check" id="{{ $technology->id }}" autocomplete="off">
+           <label class="btn btn-outline-primary" for="{{ $technology->id }}">{{ $technology->name }}</label>
+          @endforeach
+        </div>
+      </div>
+
+      <div class="mb-3">
         <label for="date" class="form-label">Date</label>
         <input type="date" class="form-control @error('date') is-invalid @enderror" id="date" name="date" value="{{ old('date') }}">
         @error('date')

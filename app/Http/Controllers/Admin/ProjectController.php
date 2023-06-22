@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ProjectRequest;
 use Illuminate\Http\Request;
 use App\Models\Project;
+use App\Models\Technology;
 use App\Models\Type;
 use Illuminate\Support\Facades\Storage;
 
@@ -31,7 +32,8 @@ class ProjectController extends Controller
     public function create()
     {
       $types = Type::all();
-      return view('admin.projects.create', compact('types'));
+      $technologies = Technology::all();
+      return view('admin.projects.create', compact('types', 'technologies'));
     }
 
     /**
@@ -43,6 +45,7 @@ class ProjectController extends Controller
     public function store(ProjectRequest $request)
     {
       $form_data = $request->all();
+      dd($form_data);
       $form_data['slug']= Project::generateSlug($form_data['title']);
 
       if (array_key_exists('image', $form_data)) {
