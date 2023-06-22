@@ -14,6 +14,7 @@
           <th scope="col">Id</th>
           <th scope="col">Title</th>
           <th scope="col">Category</th>
+          <th scope="col">Technologies</th>
           <th scope="col">Date</th>
           <th scope="col">Action</th>
         </tr>
@@ -27,6 +28,15 @@
               <span class="badge text-bg-info">
                 {{ $project->type?->name }}
               </span>
+            </td>
+            <td>
+              @forelse ($project->technologies as $technology)
+                <span class="badge text-bg-warning">
+                  {{ $technology->name }}
+                </span>
+              @empty
+                empty
+              @endforelse
             </td>
             <td>{{ $project->date }}</td>
             <td>
