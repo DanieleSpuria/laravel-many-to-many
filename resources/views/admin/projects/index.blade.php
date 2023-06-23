@@ -25,18 +25,18 @@
             <td>{{ $project->id }}</td>
             <td>{{ $project->title }}</td>
             <td>
-              <span class="badge text-bg-info">
-                {{ $project->type?->name }}
-              </span>
+              @if ($project->type?->name)
+                <span class="badge text-bg-info">
+                  {{ $project->type?->name }}
+                </span>
+              @endif
             </td>
             <td>
-              @forelse ($project->technologies as $technology)
+              @foreach ($project->technologies as $technology)
                 <span class="badge text-bg-warning">
                   {{ $technology->name }}
                 </span>
-              @empty
-                empty
-              @endforelse
+              @endforeach
             </td>
             <td>{{ $project->date }}</td>
             <td>
