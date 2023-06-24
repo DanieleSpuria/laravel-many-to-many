@@ -79,7 +79,9 @@
              value="{{ $technology->id }}"
              id="{{ $technology->id }}"
              autocomplete="off"
-             @if (in_array($technology->id, old('technologies', []))) checked @endif
+             @if ($project->technologies->contains($technology->id)) checked
+             @elseif (in_array($technology->id, old('technologies', []))) checked
+             @endif
            >
            <label class="btn btn-outline-dark" for="{{ $technology->id }}">{{ $technology->name }}</label>
           @endforeach
