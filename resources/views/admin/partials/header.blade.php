@@ -1,7 +1,10 @@
-<header class="bg-dark text-white">
-  <nav class="navbar navbar-expand-md navbar-dark">
-    <div class="container">
-        <a class="navbar-brand d-flex align-items-center" href="{{ route('admin.home') }}">
+<header class="text-white">
+  <nav class="navbar navbar-expand-md navbar-dark px-4">
+
+        <a
+          class="navbar-brand d-flex align-items-center"
+          href="{{ route('admin.home') }}"
+        >
             <div class="logo_laravel">
               LOGO
             </div>
@@ -16,7 +19,7 @@
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{url('/') }}">Vai al sito</a>
+                    <a class="nav-link" href="{{ route('home') }}">go to the site</a>
                 </li>
             </ul>
 
@@ -25,17 +28,25 @@
                 <!-- Authentication Links -->
                 @guest
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('login') }}">Login</a>
+                    <a class="nav-link" href="{{ route('login') }}">
+                      <i class="fa-solid fa-right-to-bracket"></i>
+                    </a>
                 </li>
                 @if (Route::has('register'))
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('register') }}">Register</a>
+                    <a class="nav-link" href="{{ route('register') }}">
+                      <i class="fa-regular fa-square-plus"></i>
+                    </a>
                 </li>
                 @endif
                 @else
-                  <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                      document.getElementById('logout-form').submit();">
-                      Logout
+                  <a
+                    class="dropdown-item"
+                    href="{{ route('logout') }}"
+                    onclick="event.preventDefault();
+                    document.getElementById('logout-form').submit();"
+                  >
+                    <i class="fa-solid fa-right-from-bracket"></i>
                   </a>
 
                   <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -44,6 +55,6 @@
                 @endguest
             </ul>
         </div>
-    </div>
+
   </nav>
 </header>

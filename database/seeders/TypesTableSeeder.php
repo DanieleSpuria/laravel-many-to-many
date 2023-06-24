@@ -16,7 +16,7 @@ class TypesTableSeeder extends Seeder
      */
     public function run()
     {
-        $data = ['FrontEnd', 'BackEnd', 'Full-Stack', 'Project Manager'];
+        $data = ['FrontEnd', 'BackEnd', 'Full-Stack'];
 
         foreach($data as $type) {
           $new_type = new Type();
